@@ -1,0 +1,24 @@
+/* Login/register */
+
+
+.form-login {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    padding: 200pt 0pt 0pt 0pt;
+}
+
+.btn-submit {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #FACC93;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #FACC93 !important;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #3E048B;
+    margin-top: 10px;
+}
