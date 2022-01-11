@@ -44,7 +44,7 @@
                     {{ form.password(class="form-control ") }}
                 {% endif %}
             </div>
-            <!-- password -->
+            <!-- token -->
             <div class="form-group">
                 {{form.token.label(class="form-control-label") }}
                 {% if form.token.errors %}
@@ -69,7 +69,7 @@
         
         <!-- forgot psw -->
         <small class="text-muted ml-2">
-            <a class="link-white" href="#">Forgot Password?</a>
+            <a class="link-white" href="{{url_for('reset_request') }}">Forgot Password?</a>
         </small>
         </div >
         <div class="form-group">

@@ -2,9 +2,10 @@ from datetime import datetime
 import os
 import base64
 import onetimepass
-from fatwatch import db, loginManager
+from fatwatch import db, loginManager, app
 from flask_login import UserMixin # class contains isAuthenticate, isActive, isAnonimous, getID
 from werkzeug.security import  check_password_hash
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 
 
@@ -45,6 +46,7 @@ class Users(db.Model, UserMixin):
     usr_active = db.Column(db.Boolean, default=1)
     usr_otp_secret = db.Column(db.String(16))
     usr_lang = db.Column(db.String(6))
+    usr_ip = db.Column(db.String)
     
     usr_cust_id = db.Column(db.Integer, db.ForeignKey('customers.cust_id'))
     usr_to_pst = db.relationship('Stations', foreign_keys='Stations.pst_usr_id',lazy = 'select', backref = db.backref('users', lazy = 'joined'))
@@ -65,8 +67,21 @@ class Users(db.Model, UserMixin):
     def verify_totp(self, token):
         return onetimepass.valid_totp(token, self.usr_otp_secret)
 
+    def get_reset_token(self, expires_sec=1800):
+        s = Serializer(app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'user_id': self.id}).decode('utf-8')
+        
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return Users.query.get(user_id)
+
     def __repr__(self):
-        return f"Users( '{self.id}','{self.usr_name}','{self.usr_company}',{self.usr_role}','{self.usr_active}','{self.usr_lang}')"
+        return f"Users( '{self.id}','{self.usr_name}','{self.usr_email}','{self.usr_company}',{self.usr_role}','{self.usr_active}','{self.usr_lang}', '{self.usr_ip}')"
 
 
 

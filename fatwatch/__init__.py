@@ -2,6 +2,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from flask_mail import Mail
+
 
 
 
@@ -15,6 +17,13 @@ migrate=Migrate(app, db)
 
 loginManager = LoginManager(app)
 loginManager.login_view = 'login'
+
+app.config['MAIL_SERVER'] = 'mail.xel.nl'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USERNAME'] = "noreply@skillsinmotion.nl"
+app.config['MAIL_PASSWORD'] = "m;1SkG[x=xC*/T"
+mail = Mail(app)
 
 from fatwatch import routes, models    # needs to be after the app
 

@@ -1,0 +1,43 @@
+{% extends "main.html" %}
+
+<!-- {%block menu %} 
+<!-- navigation -->
+<!-- <div class="nav-right">
+    <button type="button" class="btn btn-primary" >
+      <i class="fa fa-solid fa-user fa-lx" aria-hidden="true"></i>
+    </button>
+  </div>
+{% endblock menu%} --> 
+
+{% block content %}
+<div class="content-section-login">    
+    <form class="form-login" method="POST" action="" >
+        <p>Please use your authenticator app to generate a token to login.</p>
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group" >
+            <legend class="form-title">Reset Password</legend>
+        <!-- e-mail -->
+            <div class="form-group" >
+                {{ form.email.label(class="form-control-label") }}
+                {% if form.email.errors %}
+                    {{ form.email(class="form-control is-invalid" ) }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.email(class="form-control") }}
+                {% endif %}
+            </div>
+            
+        <!-- submit -->
+        <div class="form-group">
+            {{ form.submit(class="btn-submit btn-dark fa-lx") }}
+        </div >
+    </fieldset>
+
+    </form>
+</div>
+
+ {% endblock content %}
