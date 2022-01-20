@@ -1,7 +1,55 @@
 {% extends "main.html" %}
 
+{% block left %}
+<!-- Navbar Left Side -->
+<button type="button" class="hamburger dropdown-toggle" data-bs-toggle="dropdown">
+    <i class="fa fa-solid fa-bars"  aria-hidden="true" ></i>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="/customers">{{_(Customers)}}</a></li>
+        <li><a href="#">{{_(Users)}}</a></li>
+        <li><a href="#">{{_(Customers)}}</a></li>
+    <hr class="solid">
+        <li><a data-toggle="modal" data-target="#exampleModal">New Contact</a></li>
+        <li><a href="#">Edit contact</a></li>
+        <li><a href="#">Delete Contact</a></li>
+    <hr class="solid">
+        <li><a href="#">{{_(Settings)}}</a></li>
+        <li><a href="{{ url_for('logout')}}">Log Out</a></li>
+    </ul>
+{% endblock left %}    
+{% block center %} 
+<div class="text-center" >
+    <h4> {{ _('Customers') }}</h4>
+    </div>
+{% endblock center %}
+
+{% block right %}
+<div >
+<h6> {{ _('Hi, %(username)s!', username=username) }}</h6>
+</div>
+{% endblock right %}
+
 {% block content %}
 
-<h1> Hello Customer!</h1>
+<table class="table sortable">
+    <tr class="table-header">
+       {% for header in headings %}
+       <th class="table-cell"> {{header}} </th>
+       {% endfor %}
+    </tr>
 
+    {% for row in data %}
+    <tr class="table-row">
+        {%for cell in row %}
+        <td class="table-cell"> {{ cell }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+<script>
+    $(document).ready(function() {
+        $("table").jsdragtable();
+    });
+</script>
 {% endblock content %}

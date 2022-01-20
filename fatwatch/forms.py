@@ -2,70 +2,71 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, validators, ValidationError
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from flask_babel import _, lazy_gettext as _l
 from fatwatch.models import Users, Customers
 class RegistrationForm(FlaskForm):
-    username = StringField('Username',
+    username = StringField(_l('Username'),
                            validators=[DataRequired(), Length(min=2, max=20)])
 
 
-   
-    companies = ['Please select your company']+[ c for c, in Customers.query.with_entities(Customers.cust_name)]
-    company = SelectField('Company',choices=companies, validators=[DataRequired(), Length(min=2, max=50)])
+    placeholder_comp=_l('Please select your company')
+    companies = [placeholder_comp]+[ c for c, in Customers.query.with_entities(Customers.cust_name)]
+    company = SelectField(_l('Company'),choices=companies, validators=[DataRequired(), Length(min=2, max=50)])
 
     roles = [(''),('role1'), ('role2')]
-    role = SelectField('Role',
+    role = SelectField(_l('Role'),
                            choices=roles,validators=[DataRequired(), Length(min=2, max=20)])
 
     languages = [(''),('en/EN'), ('nl/NL')]
-    language = SelectField('Language',
+    language = SelectField(_l('Language'),
                            choices=languages, validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    confirm_password = PasswordField('Confirm Password',
+    password = PasswordField(_l('Password'), validators=[DataRequired()])
+    confirm_password = PasswordField(_l('Confirm Password'),
                                      validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Sign Up')
+    submit = SubmitField(_l('Sign Up'))
 
     def validate_username(self, username):
         user=Users.query.filter_by(usr_name=username.data).first()
         if user:
-            raise ValidationError('That username is taken please choose another one.')
+            raise ValidationError(_l('That username is taken please choose another one.'))
             
     def validate_email(self, email):
         user=Users.query.filter_by(usr_email=email.data).first()
         if user:
-            raise ValidationError('There is another account registered with this email.')
+            raise ValidationError(_l('There is another account registered with this email.'))
 
 class LoginForm(FlaskForm):
-    email = StringField('Email',
+    email = StringField(_l('Email'),
                         validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    token = StringField('Token', validators=[DataRequired(), Length(6, 6)])
+    password = PasswordField(_l('Password'), validators=[DataRequired()])
+    token = StringField(_l('Token'), validators=[DataRequired(), Length(6, 6)])
     remember = BooleanField('Remember Me')
-    submit = SubmitField('Login')        
+    submit = SubmitField(_l('Login'))        
 
 class RequestResetForm(FlaskForm):
-    email = StringField('Email',
+    email = StringField(_l('Email'),
                         validators=[DataRequired(), Email()])
-    submit = SubmitField('Request Password Reset')
+    submit = SubmitField(_l('Request Password Reset'))
 
     def validate_email(self, email):
         user = Users.query.filter_by(usr_email=email.data).first()
         if user is None:
-            raise ValidationError('There is no account with that email. You must register first.')
+            raise ValidationError(_l('There is no account with that email. You must register first.'))
 
 class ResetPasswordForm(FlaskForm):
-    password = PasswordField('Password', validators=[DataRequired()])
-    confirm_password = PasswordField('Confirm Password',
+    password = PasswordField(_l('Password'), validators=[DataRequired()])
+    confirm_password = PasswordField(_l('Confirm Password'),
                                      validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Reset Password')
+    submit = SubmitField(_l('Reset Password'))
 
 class CustomersForm(FlaskForm):
-    customerName = StringField('Name')
-    customerAddress = StringField('Address')
-    customerZip = StringField('Zip')
-    customerCity = StringField('City')
-    customerPhone = StringField('Phone')
-    customerEmail = StringField('E-mail')
+    customerName = StringField(_l('Name'))
+    customerAddress = StringField(_l('Address'))
+    customerZip = StringField(_l('Zip'))
+    customerCity = StringField(_l('City'))
+    customerPhone = StringField(_l('Phone'))
+    customerEmail = StringField(_l('E-mail'))
 
 

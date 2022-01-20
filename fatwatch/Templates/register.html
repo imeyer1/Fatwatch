@@ -3,13 +3,10 @@
 {% block content %}
 <div class="content-section-login">
    <form class="form-login" method="POST" action="">
-    <p>Before you submit this form, please ensure you have an authenticator app <br>
-        installed on your smartphone, as you will need it to complete your registration.</p>
-
-    
+        <p>{{_('Before you submit this form, please ensure you have an authenticator app such as Google Authenticator, Authy or simlar installed on your smartphone as you will need it to complete your registration.')}}</p> 
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
-            <legend class="form-title">Register</legend>
+            <legend class="form-title">{{_('Register')}}</legend>
             <!-- user name -->
             <div class="form-group">
                 {{ form.username.label(class="form-control-label") }}
@@ -111,19 +108,19 @@
                 {% endif %}
             </div>
         <!-- submit -->
-        <input type="submit" value="Sign Up" class="btn-submit btn-dark fa-lx" action="/register"/>
+        <input type="submit" value="{{_('Sign Up')}}" class="btn-submit btn-dark fa-lx" action="/register"/>
         <!-- <div class="form-group">
             {{ form.submit(class="btn-submit btn-dark fa-lx") }}
         </div> -->
         <!-- back to login -->
         <div class="form-group">
             <small class="text-muted">
-                Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+                {{_('Already Have An Account?')}} <a class="ml-2" href="{{ url_for('login') }}">{{_('Sign In')}}</a>
             </small>
         </div>
         <div class="form-group">
             <small class="text-muted">
-                 <a class="ml-2" href="{{ url_for('login') }}">Reset Password</a>
+                 <a class="ml-2" href="{{ url_for('login') }}">{{_('Reset Password')}}</a>
             </small>
         </div>
     </fieldset>

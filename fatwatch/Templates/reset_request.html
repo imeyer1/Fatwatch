@@ -12,10 +12,9 @@
 {% block content %}
 <div class="content-section-login">    
     <form class="form-login" method="POST" action="" >
-        <p>Please use your authenticator app to generate a token to login.</p>
         {{ form.hidden_tag() }}
         <fieldset class="form-group" >
-            <legend class="form-title">Reset Password</legend>
+            <legend class="form-title">{{_('Reset Password')}}</legend>
         <!-- e-mail -->
             <div class="form-group" >
                 {{ form.email.label(class="form-control-label") }}

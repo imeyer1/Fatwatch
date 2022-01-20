@@ -1,13 +1,16 @@
 import os
 import base64
 from io import BytesIO
+import psycopg2
 from flask import render_template, url_for, flash, redirect, session,  abort, request
-from fatwatch import app, db, mail
+from fatwatch import app, db, mail, cur
 from flask_login import login_user, current_user, logout_user, login_required
 from fatwatch.forms import LoginForm, RegistrationForm, ResetPasswordForm, RequestResetForm, CustomersForm
 from fatwatch.models import Users, Customers
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_mail import Message
+from flask_babel import _, get_locale
+from sqlalchemy.inspection import inspect
 import pyqrcode
 
 
@@ -16,18 +19,39 @@ import pyqrcode
 # def home():
 #     return render_template('main.html')
 
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    # if current_user.is_authenticated:
+    #     # if user is logged in we get out of here
+    #     return redirect(url_for('main'))
+    form = RegistrationForm()
+
+    
+    if form.validate_on_submit():
+        psw = generate_password_hash(form.password.data)
+
+        # add new user to the database
+        user = Users(usr_name=form.username.data, usr_company=form.company.data, usr_role=form.role.data, usr_lang=form.language.data, usr_email=form.email.data, usr_psw=psw)
+        db.session.add(user)
+        db.session.commit()
+       
+        # redirect to the two-factor auth page, passing username in session
+        session['username'] = user.usr_name
+        return redirect(url_for('two_factor_setup'))
+    return render_template('register.html', form=form)
+
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     # if current_user.is_authenticated:
     #     # if user is logged in we get out of here
     #     return redirect(url_for('login'))
     form = LoginForm()
-    # if current_user.is_authenticated == False:
-    #     # if user has IP bypass login
-    #     print(request.remote_addr)
-    #     user = Users.query.filter_by(usr_ip=request.remote_addr).first()
-    #     login_user(user, remember=form.remember.data)
-    #     return  redirect(url_for('login'))            
+    if current_user.is_authenticated == False:
+        # if user has IP bypass login
+        print(request.remote_addr)
+        user = Users.query.filter_by(usr_ip=request.remote_addr).first()
+        login_user(user, remember=form.remember.data)
+        return  redirect(url_for('login'))            
         
     if form.validate_on_submit():
         print(Users.usr_ip)
@@ -44,26 +68,7 @@ def login():
     return render_template('login.html', title='Login', form=form)
 
 
-@app.route("/register", methods=['GET', 'POST'])
-def register():
-    if current_user.is_authenticated:
-        # if user is logged in we get out of here
-        return redirect(url_for('main'))
-    form = RegistrationForm()
 
-    
-    if form.validate_on_submit():
-        psw = generate_password_hash(form.password.data)
-
-        # add new user to the database
-        user = Users(usr_name=form.username.data, usr_company=form.company.data, usr_role=form.role.data, usr_lang=form.language.data, usr_email=form.email.data, usr_psw=psw)
-        db.session.add(user)
-        db.session.commit()
-       
-        # redirect to the two-factor auth page, passing username in session
-        session['username'] = user.usr_name
-        return redirect(url_for('two_factor_setup'))
-    return render_template('register.html', form=form)
         
 @app.route('/twofactor')
 def two_factor_setup():
@@ -106,10 +111,10 @@ def send_reset_email(user):
     msg = Message('Password Reset Request',
                   sender='noreply@skillsinmotion.nl',
                   recipients=[user.usr_email])
-    msg.body = f'''To reset your password, visit the following link:
-{url_for('reset_token', token=token, _external=True)}
-If you did not make this request then simply ignore this email and no changes will be made.
-'''
+    msg.body = _('If you did not make this request then simply ignore this email and no changes will be made.\
+    To reset your password, visit the following link. This link is valid for 30 minutes:')
+    {url_for('reset_token', token=token, _external=True)}
+
     mail.send(msg)
 
 @app.route("/reset_password", methods=['GET', 'POST'])
@@ -120,7 +125,7 @@ def reset_request():
     if form.validate_on_submit():
         user = Users.query.filter_by(usr_email=form.email.data).first()
         send_reset_email(user)
-        flash('An email has been sent with instructions to reset your password.', 'info')
+        flash (_('An email has been sent with instructions to reset your password.', 'info'))
         return redirect(url_for('login'))
     return render_template('reset_request.html', title='Reset Password', form=form)
 
@@ -130,21 +135,35 @@ def reset_token(token):
     #     return redirect(url_for('customers'))
     user = Users.verify_reset_token(token)
     if user is None:
-        flash('That is an invalid or expired token', 'warning')
+        flash(_('That is an invalid or expired token', 'warning'))
         return redirect(url_for('reset_request'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data)
         user.password = hashed_password
         db.session.commit()
-        flash('Your password has been updated! You are now able to log in', 'success')
+        flash(_('Your password has been updated! You are now able to log in', 'success'))
         return redirect(url_for('login'))
-    return render_template('reset_token.html', title='Reset Password', form=form)
+    return render_template('reset_token.html', title=_('Reset Password'), form=form)
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+    
 
 @app.route("/customers", methods=['GET', 'POST'])
 @login_required
 def customers():
     form = CustomersForm()
-    customers = Customers.query.all()
+    cur.execute("SELECT column_name FROM information_schema.columns  \
+            WHERE table_schema = 'public' AND table_name='customers';")
+    headings=column_names = [row[0] for row in cur]
+    # headings =[column.name for column in inspect(Customers).c]
     customer_detail = Customers.query.first()
-    return render_template('customers.html', title='Contacts', username=current_user.usr_name, form=form, customer=customers, customer_detail=customer_detail)
+    cur.execute("SELECT * FROM customers;")
+    data = cur.fetchall()
+    
+   
+    
+    return render_template('customers.html', title='Contacts', headings= headings, username=current_user.usr_name, form=form, data=data, customer_detail=customer_detail)

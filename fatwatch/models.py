@@ -29,7 +29,7 @@ class Customers(db.Model):
 
     
     def __repr__(self):
-        return f"Customers( '{self.cust_name}','{self.cust_address}','{self.cust_active}')"
+        return f"Customers( '{self.cust_id}',{self.cus_timestamp}',{self.cust_name}','{self.cust_address}',,{self.cust_zip}',{self.cust_city}',,{self.cust_phone}',{self.cust_email}','{self.cust_active}')"
     
    
 

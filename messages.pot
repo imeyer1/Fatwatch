@@ -1,0 +1,172 @@
+# Translations template for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-01-18 11:52+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: fatwatch/forms.py:8
+msgid "Username"
+msgstr ""
+
+#: fatwatch/forms.py:13
+msgid "Please select your company"
+msgstr ""
+
+#: fatwatch/forms.py:14
+msgid "Company"
+msgstr ""
+
+#: fatwatch/forms.py:17
+msgid "Role"
+msgstr ""
+
+#: fatwatch/forms.py:21
+msgid "Language"
+msgstr ""
+
+#: fatwatch/forms.py:25 fatwatch/forms.py:43 fatwatch/forms.py:59
+msgid "Password"
+msgstr ""
+
+#: fatwatch/forms.py:26 fatwatch/forms.py:60
+msgid "Confirm Password"
+msgstr ""
+
+#: fatwatch/Templates/register.html:111 fatwatch/forms.py:28
+msgid "Sign Up"
+msgstr ""
+
+#: fatwatch/forms.py:33
+msgid "That username is taken please choose another one."
+msgstr ""
+
+#: fatwatch/forms.py:38
+msgid "There is another account registered with this email."
+msgstr ""
+
+#: fatwatch/forms.py:41 fatwatch/forms.py:49
+msgid "Email"
+msgstr ""
+
+#: fatwatch/forms.py:44
+msgid "Token"
+msgstr ""
+
+#: fatwatch/forms.py:46
+msgid "Login"
+msgstr ""
+
+#: fatwatch/forms.py:51
+msgid "Request Password Reset"
+msgstr ""
+
+#: fatwatch/forms.py:56
+msgid "There is no account with that email. You must register first."
+msgstr ""
+
+#: fatwatch/Templates/register.html:123
+#: fatwatch/Templates/reset_request.html:17
+#: fatwatch/Templates/reset_token.html:17 fatwatch/forms.py:62
+#: fatwatch/routes.py:145
+msgid "Reset Password"
+msgstr ""
+
+#: fatwatch/forms.py:65
+msgid "Name"
+msgstr ""
+
+#: fatwatch/forms.py:66
+msgid "Address"
+msgstr ""
+
+#: fatwatch/forms.py:67
+msgid "Zip"
+msgstr ""
+
+#: fatwatch/forms.py:68
+msgid "City"
+msgstr ""
+
+#: fatwatch/forms.py:69
+msgid "Phone"
+msgstr ""
+
+#: fatwatch/forms.py:70
+msgid "E-mail"
+msgstr ""
+
+#: fatwatch/routes.py:112
+msgid ""
+"If you did not make this request then simply ignore this email and no "
+"changes will be made.    To reset your password, visit the following "
+"link. This link is valid for 30 minutes:"
+msgstr ""
+
+#: fatwatch/routes.py:126
+msgid "An email has been sent with instructions to reset your password."
+msgstr ""
+
+#: fatwatch/routes.py:136
+msgid "That is an invalid or expired token"
+msgstr ""
+
+#: fatwatch/routes.py:143
+msgid "Your password has been updated! You are now able to log in"
+msgstr ""
+
+#: fatwatch/Templates/customers.html:5
+msgid "Hello Customer!"
+msgstr ""
+
+#: fatwatch/Templates/login.html:15
+msgid "Please use your authenticator app to generate a token to login."
+msgstr ""
+
+#: fatwatch/Templates/login.html:18
+msgid "Log In"
+msgstr ""
+
+#: fatwatch/Templates/login.html:72
+msgid "Forgot Password?"
+msgstr ""
+
+#: fatwatch/Templates/login.html:77
+msgid "Need An Account? "
+msgstr ""
+
+#: fatwatch/Templates/login.html:77
+msgid "Sign Up Now"
+msgstr ""
+
+#: fatwatch/Templates/register.html:6
+msgid ""
+"Before you submit this form, please ensure you have an authenticator app "
+"such as Google Authenticator, Authy or simlar installed on your "
+"smartphone as you will need it to complete your registration."
+msgstr ""
+
+#: fatwatch/Templates/register.html:9
+msgid "Register"
+msgstr ""
+
+#: fatwatch/Templates/register.html:118
+msgid "Already Have An Account?"
+msgstr ""
+
+#: fatwatch/Templates/register.html:118
+msgid "Sign In"
+msgstr ""
+

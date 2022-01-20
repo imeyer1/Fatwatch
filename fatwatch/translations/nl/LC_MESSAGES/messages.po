@@ -1,0 +1,178 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-01-18 11:52+0100\n"
+"PO-Revision-Date: 2022-01-18 12:24+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.9.1\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: fatwatch/forms.py:8
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+#: fatwatch/forms.py:13
+msgid "Please select your company"
+msgstr "Selecteer uw bedrijf"
+
+#: fatwatch/forms.py:14
+msgid "Company"
+msgstr "Bedrijf"
+
+#: fatwatch/forms.py:17
+msgid "Role"
+msgstr "Rol"
+
+#: fatwatch/forms.py:21
+msgid "Language"
+msgstr "Taal"
+
+#: fatwatch/forms.py:25 fatwatch/forms.py:43 fatwatch/forms.py:59
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: fatwatch/forms.py:26 fatwatch/forms.py:60
+msgid "Confirm Password"
+msgstr "Bevestig wachtwoord"
+
+#: fatwatch/Templates/register.html:111 fatwatch/forms.py:28
+msgid "Sign Up"
+msgstr "Registreren"
+
+#: fatwatch/forms.py:33
+msgid "That username is taken please choose another one."
+msgstr "Deze gebruikersnaam is bezet, kies een andere."
+
+#: fatwatch/forms.py:38
+msgid "There is another account registered with this email."
+msgstr "Er is een andere account geregistreerd met dit emailadres."
+
+#: fatwatch/forms.py:41 fatwatch/forms.py:49
+msgid "Email"
+msgstr "E-mail"
+
+#: fatwatch/forms.py:44
+msgid "Token"
+msgstr "Token"
+
+#: fatwatch/forms.py:46
+msgid "Login"
+msgstr "Inloggen"
+
+#: fatwatch/forms.py:51
+msgid "Request Password Reset"
+msgstr "Vraag wachtwoordreset aan"
+
+#: fatwatch/forms.py:56
+msgid "There is no account with that email. You must register first."
+msgstr "Er is geen account met dit emailadres. U moet zich eerst registreren."
+
+#: fatwatch/Templates/register.html:123
+#: fatwatch/Templates/reset_request.html:17
+#: fatwatch/Templates/reset_token.html:17 fatwatch/forms.py:62
+#: fatwatch/routes.py:145
+msgid "Reset Password"
+msgstr "Wachtwoord opnieuw instellen"
+
+#: fatwatch/forms.py:65
+msgid "Name"
+msgstr "Naam"
+
+#: fatwatch/forms.py:66
+msgid "Address"
+msgstr "Adres"
+
+#: fatwatch/forms.py:67
+msgid "Zip"
+msgstr "Postcode"
+
+#: fatwatch/forms.py:68
+msgid "City"
+msgstr "Stad"
+
+#: fatwatch/forms.py:69
+msgid "Phone"
+msgstr "Telefoon"
+
+#: fatwatch/forms.py:70
+msgid "E-mail"
+msgstr "E-mail"
+
+#: fatwatch/routes.py:112
+msgid ""
+"If you did not make this request then simply ignore this email and no "
+"changes will be made.    To reset your password, visit the following link. "
+"This link is valid for 30 minutes:"
+msgstr ""
+"Als u dit verzoek niet heeft gedaan, negeer deze e-mail dan gewoon en er "
+"zullen geen wijzigingen worden aangebracht.    Om uw wachtwoord opnieuw in "
+"te stellen, gaat u naar de volgende link. Deze link is geldig voor 30 "
+"minuten:"
+
+#: fatwatch/routes.py:126
+msgid "An email has been sent with instructions to reset your password."
+msgstr ""
+"Er is een e-mail verzonden met instructies om uw wachtwoord opnieuw in te "
+"stellen."
+
+#: fatwatch/routes.py:136
+msgid "That is an invalid or expired token"
+msgstr "Dit is een ongeldig of verlopen token"
+
+#: fatwatch/routes.py:143
+msgid "Your password has been updated! You are now able to log in"
+msgstr "Uw wachtwoord is bijgewerkt! U kunt nu inloggen"
+
+#: fatwatch/Templates/customers.html:5
+msgid "Hello Customer!"
+msgstr "Hallo klant!"
+
+#: fatwatch/Templates/login.html:15
+msgid "Please use your authenticator app to generate a token to login."
+msgstr ""
+"Gebruik uw authenticatie app om een token te genereren om in te loggen."
+
+#: fatwatch/Templates/login.html:18
+msgid "Log In"
+msgstr "Inloggen"
+
+#: fatwatch/Templates/login.html:72
+msgid "Forgot Password?"
+msgstr "Wachtwoord vergeten?"
+
+#: fatwatch/Templates/login.html:77
+msgid "Need An Account? "
+msgstr "Een account nodig?"
+
+#: fatwatch/Templates/login.html:77
+msgid "Sign Up Now"
+msgstr "Nu aanmelden"
+
+#: fatwatch/Templates/register.html:6
+msgid ""
+"Before you submit this form, please ensure you have an authenticator app "
+"such as Google Authenticator, Authy or simlar installed on your smartphone "
+"as you will need it to complete your registration."
+msgstr ""
+"Zorg ervoor dat u een authenticatieapp zoals Google Authenticator, Authy of "
+"iets vergelijkbaars op uw smartphone hebt geïnstalleerd voordat u dit "
+"formulier verzendt, omdat u die nodig hebt om uw registratie te voltooien."
+
+#: fatwatch/Templates/register.html:9
+msgid "Register"
+msgstr "Registreren"
+
+#: fatwatch/Templates/register.html:118
+msgid "Already Have An Account?"
+msgstr "Heb je al een account?"
+
+#: fatwatch/Templates/register.html:118
+msgid "Sign In"
+msgstr "Inloggen"
