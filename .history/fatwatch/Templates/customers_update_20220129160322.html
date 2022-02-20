@@ -1,0 +1,49 @@
+{% block content %}
+<div>
+
+   <!-- Modal Edit -->
+   <div id="modaledit{{id}}" class="modal fade" role="dialog">
+      <form action="/update/{{ name_to_update.id }}" method="POST">
+         {{ form.hidden_tag() }}
+
+         {{ form.name.label(class="form-label") }}
+         {{ form.name(class="form-control", value=name_to_update.name) }}
+         <br />
+
+         {{ form.address.label(class="form-label") }}
+         {{ form.address(class="form-control", value=name_to_update.address) }}
+         <br />
+
+         {{ form.zip.label(class="form-label") }}
+         {{ form.zip(class="form-control", value=name_to_update.zip) }}
+         <br />
+
+         {{ form.city.label(class="form-label") }}
+         {{ form.city(class="form-control", value=name_to_update.city) }}
+         <br />
+
+         {{ form.email.label(class="form-label") }}
+         {{ form.email(class="form-control", value=name_to_update.email) }}
+         <br />
+
+         {{ form.phone.label(class="form-label") }}
+         {{ form.phone(class="form-control", value=name_to_update.phone) }}
+         <br />
+
+         {{ form.active.label(class="form-label") }}
+         {{ form.active( value=name_to_update.active) }}
+         <br />
+
+         <br />
+
+         {{ form.submit(class="btn btn-secondary") }}
+
+         <a href="{{ url_for('update', id=id)}}" class="btn btn-primary">Update</a>
+
+
+      </form>
+   </div>
+</div>
+
+
+{% endblock content %}

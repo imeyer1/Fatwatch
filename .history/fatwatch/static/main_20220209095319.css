@@ -1,0 +1,99 @@
+pre{
+    width: 1100px;
+    float: left;
+    white-space: pre-wrap;
+    overflow-y:hidden;
+    overflow-x:hidden;
+    border-top: 2000px;
+    border:none;
+    text-align: center;
+    
+}
+
+
+
+/* Navigation */
+
+.nav{
+    background-color: #60A9C0;
+    padding-top: 200px;
+    position: relative;
+}
+.nav-center {
+    margin: 0;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    right: 50%;
+
+}
+.nav-right {
+    margin: 0;
+    position: absolute;
+    top: 82%;
+    right: 10px;
+}
+.hamburger{
+    position: absolute;
+    top: 80%;
+    left: 10px;
+    background-color: transparent;
+    border: none;
+    
+}
+.fa{
+    font-size: 25px;
+    color: black;
+    padding-left: 10px;    
+}
+
+
+/* Login/register */
+
+.content-section-login {
+    width: 30%; 
+    margin: auto;
+}
+
+.form-login {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    padding: 200pt 0pt 0pt 0pt;
+}
+
+.btn-submit {
+    
+    font-weight: 500;
+    color: #FACC93;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #FACC93 !important;
+    font-weight: 500;
+    color: #3E048B;
+    margin-top: 10px;
+}
+
+/* Tables */
+
+.form-control{
+    text-size-adjust: 8px;
+}
+.btn-info{
+    float: right;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.table {
+
+    background-color: aliceblue;
+    width: 100%;
+    text-size-adjust: auto;
+}
+
+.selected{
+    background-color: cornflowerblue;
+}
+

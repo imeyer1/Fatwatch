@@ -1,0 +1,118 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="content-section-login">
+   <form class="form-login" method="POST" action="">
+        <p>{{_('Before you submit this form, please ensure you have an authenticator app such as Google Authenticator, Authy or simlar installed on your smartphone as you will need it to complete your registration.')}}</p> 
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="form-title">{{_('Register')}}</legend>
+            <!-- user name -->
+            <div class="form-group">
+                {{ form.username.label(class="form-control-label") }}
+                {% if form.username.errors %}
+                    {{ form.username(class="form-control  is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.username.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.username(class="form-control ") }}
+                {% endif %}
+            </div>
+
+             <!-- e-mail -->
+            <div class="form-group">
+                {{ form.email.label(class="form-control-label") }}
+                {% if form.email.errors %}
+                    {{ form.email(class="form-control  is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.email(class="form-control ") }}
+                {% endif %}
+            </div>
+
+            <!-- company -->
+            <div class="form-group">
+                {{ form.company.label(class="form-control-label") }}
+                {% if form.company.errors %}
+                    {{ form.company(class="form-control  is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.company.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.company(class="form-control ") }}
+                {% endif %}
+            </div>
+           <!-- role -->
+            <div class="form-group">
+                {{ form.role.label(class="form-control-label") }}
+                {% if form.role.errors %}
+                    {{ form.role(class="form-control  is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.role.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.role(class="form-control ") }}
+                {% endif %}
+            </div>
+           <!-- language -->
+           + [" "]
+            <!-- password -->
+            <div class="form-group">
+                {{ form.password.label(class="form-control-label") }}
+                {% if form.password.errors %}
+                    {{ form.password(class="form-control  is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.password(class="form-control") }}
+                {% endif %}
+            </div>
+            <!-- confirm password -->
+            <div class="form-group">
+                {{ form.confirm_password.label(class="form-control-label") }}
+                {% if form.confirm_password.errors %}
+                    {{ form.confirm_password(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.confirm_password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.confirm_password(class="form-control ") }}
+                {% endif %}
+            </div>
+        <!-- submit -->
+        <input type="submit" value="{{_('Sign Up')}}" class="btn-submit btn-dark fa-lx" action="/register"/>
+        <!-- <div class="form-group">
+            {{ form.submit(class="btn-submit btn-dark fa-lx") }}
+        </div> -->
+        <!-- back to login -->
+        <div class="form-group">
+            <small class="text-muted">
+                {{_('Already Have An Account?')}} <a class="ml-2" href="{{ url_for('login') }}">{{_('Sign In')}}</a>
+            </small>
+        </div>
+        <div class="form-group">
+            <small class="text-muted">
+                 <a class="ml-2" href="{{ url_for('login') }}">{{_('Reset Password')}}</a>
+            </small>
+        </div>
+    </fieldset>
+    </form>
+</div>
+
+ {% endblock content %}

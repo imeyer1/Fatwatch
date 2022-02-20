@@ -1,0 +1,100 @@
+{% block content %}
+
+<table class="table sortable">
+    <tr class="table-header">
+       {% for header in headings %}
+       <th class="table-cell"> {{header}} </th>
+       {% endfor %}
+    </tr>
+
+    {% for row in data %}
+    <tr class="table-row">
+        {%for cell in row %}
+        <td class="table-cell"> {{ cell }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+  <!-- Dragable Columns -->
+<script>
+    $(document).ready(function() {
+        $("table").jsdragtable();
+    });
+    </script>
+    <script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        ajax: '/api/data',
+        serverSide: true,
+        columns: [
+          {data: 'name'},
+          {data: 'age'},
+          {data: 'address', orderable: false},
+          {data: 'phone', orderable: false},
+          {data: 'email'}
+        ],
+      });
+    });
+    </script>
+{% endblock %}
+
+
+
+.table {
+
+    border: 0px;
+    padding-top: 20px;
+    padding-left: 8px;
+    background-color: white;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+.jsdragtable-contents {
+    background: #fff;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    box-shadow: 2px 2px 5px #aaa;
+    padding: 0;
+}
+
+.jsdragtable-contents table {
+    margin-bottom: 0;
+}
+
+
+.table-row:nth-child(even){
+    background-color: #e5e5e5;
+}
+.table-header{
+    text-align: left;
+    border-bottom: 0px;
+}
+.table-cell{
+    border-right: 1px;
+    border-right-color: black;
+    border-style: solid;
+}
+
+
+cur = conn.cursor()
+    cur.execute("SELECT column_name FROM information_schema.columns  \
+            WHERE table_schema = 'public' AND table_name='customers';")
+    headings=column_names = [row[0] for row in cur]
+    # headings =[column.name for column in inspect(Customers).c]
+    customer_detail = Customers.query.first()
+    cur.execute("SELECT * FROM customers;")
+    data = cur.fetchall()
+
+    return render_template('customers.html', title='Contacts', headings= headings, username=current_user.usr_name, form=form, data=data, customer_detail=customer_detail)
+
+
+    {{row[7]}}

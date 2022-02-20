@@ -1,0 +1,79 @@
+{% extends "main.html" %}
+
+
+{% block center %}
+<div class="text-center">
+     <h4 class="title"> {{title}}</h4>
+     <div class="prefix" style="display: none;">{{prefix}}</div>
+</div>
+{% endblock center %}
+
+{% block right %}
+<div>
+    <h6> {{ _('Hi, %(username)s!', username=username) }}</h6>
+</div>
+{% endblock right %}
+
+{% block content %}
+
+<div class="container-fluid" >
+
+    <<div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <span class="input-group-text" id="basic-addon2">@example.com</span>
+      </div>
+    <div class="col">    
+        <div class="col post_msg"></div>
+        <div class="col">
+        <button type="button" class="btn_new btn-info float-end"><i class="fa fa-plus fa-1x"></i> Add New</button>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+        <table id="table" class="table table-hover">
+            <thead>
+                <tr class="theader">
+                    {% for header in headings %}
+                    <th class="table-cell"> {{header}} </th>
+
+                    {% endfor %}
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody class="tbody">
+                {% for row in data %}
+
+                <tr class="table-row" row_id="{{row[0]}} ">
+                    {%for cell in row %}
+                    <td>
+                        {% if cell %}
+                        <div input readonly="" class="row_data" edit_type="click"> {{ cell }}</div>
+                        {% else %}
+                        <div input readonly="" class="row_data" edit_type="click"> &nbsp;</div>
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                    <td>
+                        <a id="btn_edit" class="btn_edit" row_id="{{row[0]}}"><i class="fa fa-pencil fa-1x"></i></a>
+
+                        <a id="btn_save" class="btn_save" row-id="{{row[0]}}"><i class="fa fa-check fa-1x"></i></a>
+                        <a id="btn_cancel" class="btn_cancel" row-id="{{row[0]}}"><i class="fa fa-xmark fa-1x"></i></a>
+                        <a id="btn_delete" class="btn_delete" row-id="{{row[0]}}"><i class="fa fa-trash-o fa-1x"></i></a>
+
+
+                    </td>
+                </tr>
+
+
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+
+{% endblock content %}

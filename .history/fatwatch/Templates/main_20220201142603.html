@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+        <!-- Bootstrap 5 CSS -->
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/899c314c25.js" crossorigin="anonymous"></script>
+   
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!--javaScript-->
+        <title>FATWatch</title>
+        
+        <script type="text/javascript">
+            // update rec row on edit button click
+            $(document).on("click", ".update", function(){
+                var id = $(this).attr("id");
+                var string = id;
+                var txtname = $("#txtname").val();
+                var txtdepartment = $("#txtdepartment").val();
+                var txtphone = $("#txtphone").val();
+                $.post("/ajax_update", { string: string,txtname: txtname, txtdepartment: txtdepartment, txtphone: txtphone}, function(data) {
+                    $("#displaymessage").html(data);
+                    $("#displaymessage").show();
+                });
+                 
+                 
+            });
+            // Edit row on edit button click
+            $(document).on("click", ".edit", function(){  
+                $(this).parents("tr").find("td:not(:nth-child(1),:nth-last-child(2),:nth-last-child(1))").each(function(i){
+                    if (i=='0'){
+                        var idname = 'txtname';
+                    }else if (i=='1'){
+                        var idname = 'txtdepartment';
+                    }else if (i=='2'){
+                        var idname = 'txtphone';
+                    }else{} 
+                    $(this).html('<input type="text"  name="updaterec" id="' + idname + '" class="form-control" value="' + $(this).text() + '">');
+                    console.log(idname);
+                });  
+                $(this).parents("tr").find(".delete, .edit").toggle();
+                $(".add-new").attr("disabled", "disabled");
+                $(this).parents("tr").find(".add").removeClass("add").addClass("update"); 
+            });
+        </script>
+    </head>
+    <body >
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+
+        <!-- Header -->
+        <div class="container-fluid p-5 bg-dark text-white text-center fixed-top">
+            <a class="brand" style="margin-bottom: 0px; " href="#">
+                <img src="/static/img/LogoFatWatch2.0_50.png" /></a>
+        </div>
+
+        <!-- navigation -->
+        <nav class="nav navbar-expand-md" >
+            <div class="container-fluid">
+                {% block left %} {% endblock left %}
+                <!-- Navbar Center -->
+                <div class="nav-center">
+                    {% block center %} {% endblock center %}
+                </div>
+                <!-- Navbar Right Side -->
+                <div class="nav-right">
+                    {% block right %} {% endblock right %}
+                </div>
+            </div>
+        </nav>
+    
+        <!-- body -->
+
+    <div class="content container-fluid" >
+                
+    <!-- {% with messages = get_flashed_messages(with_categories = true) %}
+        {% if messages %}
+        {% for category, message in messages%}
+        <div class="alert alert{{category}}">
+            {{message}}
+        </div>
+        {%endfor%}
+        {% endif %}
+    {% endwith%} -->
+    <!-- content depending on other templates -->
+    {% block content %}{% endblock %}
+   
+    </div>
+
+
+    {% block scripts %}{% endblock %}
+
+    </body>
+</html>

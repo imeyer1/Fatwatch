@@ -1,0 +1,84 @@
+{% extends "main.html" %}
+
+{% block left %}
+<!-- Navbar Left Side -->
+<button type="button" class="hamburger dropdown-toggle" data-bs-toggle="dropdown">
+    <i class="fa fa-solid fa-bars" aria-hidden="true"></i>
+</button>
+<ul class="dropdown-menu">
+    <li><a href="/customers">{{_(Customers)}}</a></li>
+    <li><a href="#">{{_(Users)}}</a></li>
+    <li><a href="#">{{_(Customers)}}</a></li>
+    <hr class="solid">
+    <li><a data-toggle="modal" data-target="#exampleModal">New Contact</a></li>
+    <li><a href="#">Edit contact</a></li>
+    <li><a href="#">Delete Contact</a></li>
+    <hr class="solid">
+    <li><a href="#">{{_(Settings)}}</a></li>
+    <li><a href="{{ url_for('logout')}}">Log Out</a></li>
+</ul>
+{% endblock left %}
+{% block center %}
+<div class="text-center">
+     <h4> {{ _('Customers') }}</h4>
+</div>
+{% endblock center %}
+
+{% block right %}
+<div>
+    <h6> {{ _('Hi, %(username)s!', username=username) }}</h6>
+</div>
+{% endblock right %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row1">
+
+        <div class="post_msg"></div>
+        <button type="button" class="btn btn-info add-new"><i class="fa fa-plus fa-1x"></i> Add New</button>
+    </div>
+    
+    <div class="row2">
+        <table id="table" class="table table-hover">
+            <thead>
+                <tr class="table-header">
+                    {% for header in headings %}
+                    <th class="table-cell"> {{header}} </th>
+
+                    {% endfor %}
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for row in data %}
+
+                <tr class="table-row" row_id="{{row[0]}} ">
+                    {%for cell in row %}
+                    <td>
+                        <div class="row_data" edit_type="click"> {{ cell }}</div>
+                    </td>
+                    {% endfor %}
+                    <td>
+                        <a class="btn_edit" row_id="{{row[0]}}"><i class="fa fa-pencil fa-1x"></i></a>
+
+                        <a class="btn_save" row-id="{{row[0]}}"><i class="fa fa-check fa-1x"></i></a>
+                        <a class="btn_cancel" row-id="{{row[0]}}"><i class="fa fa-xmark fa-1x"></i></a>
+                        <a class="btn_delete" row-id="{{row[0]}}"><i class="fa fa-trash-o fa-1x"></i></a>
+
+
+                    </td>
+                </tr>
+
+
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

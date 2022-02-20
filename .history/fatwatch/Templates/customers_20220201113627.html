@@ -1,0 +1,91 @@
+{% extends "main.html" %}
+
+{% block left %}
+<!-- Navbar Left Side -->
+<button type="button" class="hamburger dropdown-toggle" data-bs-toggle="dropdown">
+    <i class="fa fa-solid fa-bars" aria-hidden="true"></i>
+</button>
+<ul class="dropdown-menu">
+    <li><a href="/customers">{{_(Customers)}}</a></li>
+    <li><a href="#">{{_(Users)}}</a></li>
+    <li><a href="#">{{_(Customers)}}</a></li>
+    <hr class="solid">
+    <li><a data-toggle="modal" data-target="#exampleModal">New Contact</a></li>
+    <li><a href="#">Edit contact</a></li>
+    <li><a href="#">Delete Contact</a></li>
+    <hr class="solid">
+    <li><a href="#">{{_(Settings)}}</a></li>
+    <li><a href="{{ url_for('logout')}}">Log Out</a></li>
+</ul>
+{% endblock left %}
+{% block center %}
+<div class="text-center">
+    <h4> {{ _('Customers') }}</h4>
+</div>
+{% endblock center %}
+
+{% block right %}
+<div>
+    <h6> {{ _('Hi, %(username)s!', username=username) }}</h6>
+</div>
+{% endblock right %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col md-12 table-div">
+
+            <div style="padding:20px">
+
+                <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-success alert-dismissable" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                    {{message}}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+
+                <table class="table table-hover table-dark">
+
+                    <tr class="table-header">
+                        {% for header in headings %}
+                        <th class="table-cell"> {{header}} </th>
+                        {% endfor %}
+                        <th></th>
+
+                    </tr>
+
+                    <tbody>
+                        {% for row in data %}
+                        <tr>
+                            {%for cell in row %}
+                            <td class="table-cell"> {{ cell }}</td>
+                            {% endfor %}
+                            <td>
+                                
+                                <a class="edit" title="Edit" data-toggle="tooltip" id="{{row.id}}"><i class="fa fa-pencil"></i></a>
+
+
+                                
+                                <a href="/delete/{{row.id}}" class="icon-block">
+                                    <i class="fa fa-solid fa-trash fa-1x"></i></a>
+                            </td>
+                        </tr>
+
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+           </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

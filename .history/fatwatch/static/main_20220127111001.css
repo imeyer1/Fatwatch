@@ -1,0 +1,83 @@
+/* Navigation */
+
+.nav{
+    background-color: #60A9C0;
+    padding-top: 200px;
+    position: relative;
+}
+.nav-center {
+    margin: 0;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    right: 50%;
+
+}
+.nav-right {
+    margin: 0;
+    position: absolute;
+    top: 82%;
+    right: 10px;
+}
+.hamburger{
+    position: absolute;
+    top: 80%;
+    left: 10px;
+    background-color: transparent;
+    border: none;
+    
+}
+.fa{
+    font-size: 25px;
+    color: #FFFFFF;    
+}
+
+
+/* Login/register */
+
+.content-section-login {
+    width: 30%; 
+    margin: auto;
+}
+
+.form-login {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    padding: 200pt 0pt 0pt 0pt;
+}
+
+.btn-submit {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 200;
+    color: #FACC93;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #FACC93 !important;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 700;
+    color: #3E048B;
+    margin-top: 10px;
+}
+
+/* Tables */
+
+.table-div{
+    padding-top: 20px;
+    background-color: aliceblue;
+}
+.table {
+    display:block;
+    border: 0px;
+    padding: 8px;
+    background-color: white;
+    
+}
+.table-header{
+    
+    width:inherit ;
+    text-align: left;
+    border-bottom: 0px;
+}
